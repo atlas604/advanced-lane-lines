@@ -15,7 +15,7 @@ The goals / steps of this project are the following:
 
 **Camera Calibration**
 
-1. Briefly state how you computed the camera matrix and distortion coefficients. Provide an example of a distortion corrected calibration image.
+**1. Briefly state how you computed the camera matrix and distortion coefficients. Provide an example of a distortion corrected calibration image.**
 
 By using the function `cv2.drawChessboardCorners` we can locate the coordinates of the corners inside a distorted chessboard image.  Having the object points and image points we can compute the camera calibration and distortion coefficients using the `cv2.calibrateCamera()` function. Once calibration is complete, OpenCV's `cv2.undistort` function is very effective in undistorting the image. The same steps can be applied to a road image as well.
 
@@ -25,17 +25,17 @@ By using the function `cv2.drawChessboardCorners` we can locate the coordinates 
 
 **Pipeline (single images)**
 
-1. Provide an example of a distortion-corrected image.
+**1. Provide an example of a distortion-corrected image.**
 
 <img src="./output_images/example_undist_test1.png">
 
-2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
+**2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.**
 
 
 
 
 
-3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
+**3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.**
 
 In the 6th cell of my jupyter notebook file, I've pinpointed the source coordinates of a test image where the lane lines appeared to be parallel and the area where I wanted my perspective transform to take place.  Once this process was complete, I utilize a warp function I defined in the previous cell and map out the destination coordinates and apply a prespective transform using OpenCV's `cv2.warpPerspective`.
 
@@ -53,15 +53,15 @@ This resulted in the following source and destination points:
 
 <img src="./output_images/example_undist_warp.png">
 
-4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
+**4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?**
 
-5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
+**5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.**
 
 In the process_image() function, to calculate the radius of curvature, we average out the left and right curvature radii and calculate the second order of polynomial and them to the x,y in world space.  By utilizing these two formulas we are able to calculate the radius of the curvature for each line.
 
 Assuming that the camera is mounted in the middle of the car, we can compare the center points of the binary warped space of the image's center and measure the differences in position with respect to the center.  
 
-6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
+**6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.**
 
 <img src="./output_images/process_image.png">
 
@@ -69,7 +69,7 @@ Assuming that the camera is mounted in the middle of the car, we can compare the
 
 **Pipeline (video)**
 
-1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
+**1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).**
 
 https://github.com/atlas604/advanced-lane-lines/blob/master/video_output.mp4
 
@@ -77,7 +77,7 @@ https://github.com/atlas604/advanced-lane-lines/blob/master/video_output.mp4
 
 **Discussion**
 
-1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
+**1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?**
 
 Since my pipeline takes the input frame by frame, some lanes at certain frames may not be detected by the algorithm.  Having an empty array will result in errors.  To accommodate this issue, we can either lower the threshold to help detect less visible lanes or take in the data from the previous frame whenever an empty lane is detected.  I recognize the lane boundaries may slightly overflow to the other lane; however, as long as the car is maintaining its position relatively close to the center, this shouldn't impose a problem.  
 

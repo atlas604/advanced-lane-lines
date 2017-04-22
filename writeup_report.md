@@ -75,7 +75,7 @@ This resulted in the following source and destination points:
 
 **1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).**
 
-https://github.com/atlas604/advanced-lane-lines/blob/master/video_output.mp4
+Here's a [link to my video result](./video_output.mp4)
 
 ---
 

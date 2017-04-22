@@ -31,9 +31,9 @@ By using the function `cv2.drawChessboardCorners` we can locate the coordinates 
 
 **2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.**
 
+(process_image.py line 2-11) Utilizing gradient thresholds, HLS and HLV thresholding, I combine these thresholds to generate a binary image. Through various testing, absolute sobel threshold combined with Saturation and Value channels is able to clearly illustrate the lane lines in white or yellow and with other unnecessary pixels filtered out such as shadows, change in color pavement. From my observation, gradient magnitude and gradient direction thresholds don't react well to shadows. All the transformation functions are defined in the jupyter notebook.
 
-
-
+<img src="./output_images/binary_image.png">
 
 **3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.**
 
@@ -55,11 +55,15 @@ This resulted in the following source and destination points:
 
 **4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?**
 
+(process_image.py line 17-95) I use a sliding window search on the histogram along all the columns of a perspective transformed image to identify the lane lanes illustrated by pixel density.  The starting point of the lane lines will be at the peak in the histogram for each respective line.  We start at the bottom of the image and append line positions to an array for each line where the density is at its peak. We repeat this process as we move up the image until a good fit of the both lines are generated.  Utilizing this information we can fit a polynomial to map the road and do a targeted search for the next image based on the pixel positions gathered earlier to fit a second order polynomial curve.
+
 **5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.**
 
-In the process_image() function, to calculate the radius of curvature, we average out the left and right curvature radii and calculate the second order of polynomial and them to the x,y in world space.  By utilizing these two formulas we are able to calculate the radius of the curvature for each line.
+(process_image.py line 97) To calculate the radius of curvature, we utilize the information gathered from the polynomial curve from before, average out the left and right curvature radii and calculate the second order of polynomial and apply them to the x,y in world space.  By utilizing these equations we are able to calculate the radius of the curvature:
 
-Assuming that the camera is mounted in the middle of the car, we can compare the center points of the binary warped space of the image's center and measure the differences in position with respect to the center.  
+<img src="./output_images/roc.png">
+
+(process_image.py line 102) Assuming that the camera is mounted in the middle of the car, we can compare the center points of the binary warped space of the image's center and measure the differences in position with respect to the center.  
 
 **6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.**
 

@@ -63,7 +63,7 @@ Assuming that the camera is mounted in the middle of the car, we can compare the
 
 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
-<img src="./output_images/process_image.png.png">
+<img src="./output_images/process_image.png">
 
 ---
 
